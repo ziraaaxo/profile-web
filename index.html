@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Azira</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    /* styling */
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        /* color palette */
+        .bg-pink-soft { background-color: #FFD4D9; }
+        .bg-brown-soft { background-color: #DEB499; }
+        .bg-cream { background-color: #F9EDE1; }
+        .bg-peach { background-color: #FFCABE; }
+        .bg-peach-light { background-color: #FCE0D2; }
+        .bg-orange-soft { background-color: #F7C5AD; }
+        
+        .text-brown-soft { color: #DEB499; }
+        .text-brown-dark { color: #8B6F47; }
+        
+        /* import font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .bounce-in {
+            animation: bounceIn 1s ease-out;
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Progress bars */
+        .progress-bar {
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+        
+        .progress-bar.animate {
+            width: var(--progress);
+        }
+
+        /* Progress circles */
+        .progress-circle {
+            transition: stroke-dashoffset 2s ease-in-out;
+        }
+        
+        .progress-circle.animate {
+            stroke-dashoffset: calc(251.2 - (251.2 * var(--progress) / 100));
+        }
+        
+        /* Gallery grid */
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #DEB499;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-cream">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-brown-dark">
+                    <i class="fas fa-user-circle mr-2"></i>Portfolio
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-brown-dark hover:text-brown-soft">Home</a>
+                    <a href="#about" class="nav-link text-brown-dark hover:text-brown-soft">About</a>
+                    <a href="#education" class="nav-link text-brown-dark hover:text-brown-soft">Education</a>
+                    <a href="#skills" class="nav-link text-brown-dark hover:text-brown-soft">Skills</a>
+                    <a href="#language" class="nav-link text-brown-dark hover:text-brown-soft">Language</a>
+                    <a href="#germany" class="nav-link text-brown-dark hover:text-brown-soft">Germany</a>
+                    <a href="#hobby" class="nav-link text-brown-dark hover:text-brown-soft">Hobby</a>
+                    <a href="#documentation" class="nav-link text-brown-dark hover:text-brown-soft">Documentation</a>
+                    <a href="#portfolio" class="nav-link text-brown-dark hover:text-brown-soft">Portfolio</a>
+                    <a href="#contact" class="nav-link text-brown-dark hover:text-brown-soft">Contact</a>
+                </div>
+                <button class="md:hidden text-brown-dark" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-sm">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#home" class="block text-brown-dark hover:text-brown-soft" onclick="toggleMobileMenu()">Home</a>
+                <a href="#about" class="block text-brown-dark hover:text-brown-soft" onclick="toggleMobileMenu()">About</a>
+                <a href="#education" class="block text-brown-dark hover:text-brown-soft" onclick="toggleMobileMenu()">Education</a>
+                <a href="#skills" class="block text-brown-dark hover:text-brown-soft" onclick="toggleMobileMenu()">Skills</a>
+                <a href="#language" class="block text-brown-dark hover:text-brown-soft" onclick="toggleMobileMenu()">Language</a>
+                <a href="#germany" class="block text-brown-dark hover:text-brown-soft" onclick="toggleMobileMenu()">Germany</a>
+                <a href="#hobby" class="block text-brown-dark hover:text-brown-soft" onclick="toggleMobileMenu()">Hobby</a>
+                <a href="#documentation" class="block text-brown-dark hover:text-brown-soft" onclick="toggleMobileMenu()">Documentation</a>
+                <a href="#portfolio" class="block text-brown-dark hover:text-brown-soft" onclick="toggleMobileMenu()">Portfolio</a>
+                <a href="#contact" class="block text-brown-dark hover:text-brown-soft" onclick="toggleMobileMenu()">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Frame 1: HOME -->
+    <section id="home" class="min-h-screen bg-pink-soft flex items-center justify-center pt-20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="bounce-in">
+                <div class="text-6xl mb-6 float">
+                    <i class="fas fa-hand-wave text-orange-soft"></i>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold text-brown-dark mb-6">
+                    Halo! Selamat Datang ~
+                </h1>
+                <p class="text-xl md:text-2xl text-brown-soft mb-8 max-w-2xl mx-auto">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Frame 2: ABOUT -->
+    <section id="about" class="min-h-screen bg-cream py-20">
+        <div class="container mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-brown-dark mb-16">
+                    <i class="fas fa-user mr-4 text-brown-soft"></i>ABOUT
+                </h2>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-12">
+                    <div class="flex-shrink-0">
+                        <div class="w-64 h-64 rounded-full bg-peach border-8 border-white shadow-lg overflow-hidden hover-scale">
+                            <svg viewBox="0 0 200 200" class="w-full h-full">
+                                <circle cx="100" cy="100" r="90" fill="#F7C5AD"/>
+                                <circle cx="100" cy="80" r="30" fill="#DEB499"/>
+                                <circle cx="85" cy="75" r="3" fill="#8B6F47"/>
+                                <circle cx="115" cy="75" r="3" fill="#8B6F47"/>
+                                <path d="M 85 90 Q 100 100 115 90" stroke="#8B6F47" stroke-width="2" fill="none"/>
+                                <path d="M 70 120 Q 100 140 130 120" fill="#DEB499"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex-1 max-w-2xl">
+                        <h3 class="text-2xl font-semibold text-brown-dark mb-6">
+                            <i class="fas fa-quote-left text-brown-soft mr-2"></i>
+                            Tentang Saya
+                        </h3>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frame 3: EDUCATION -->
+    <section id="education" class="min-h-screen bg-peach-light py-20">
+        <div class="container mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-brown-dark mb-16">
+                    <i class="fas fa-graduation-cap mr-4 text-brown-soft"></i>EDUCATION
+                </h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="space-y-8">
+                        <div class="bg-white rounded-xl p-8 shadow-lg hover-scale">
+                            <div class="flex items-start gap-6">
+                                <div class="bg-brown-soft text-white p-4 rounded-full">
+                                    <i class="fas fa-university text-2xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-semibold text-brown-dark mb-2">Universitas Lorem Ipsum</h3>
+                                    <p class="text-brown-soft font-medium mb-2">Sarjana Teknik Informatika</p>
+                                    <p class="text-gray-600 mb-3">2020 - 2024</p>
+                                    <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-8 shadow-lg hover-scale">
+                            <div class="flex items-start gap-6">
+                                <div class="bg-brown-soft text-white p-4 rounded-full">
+                                    <i class="fas fa-school text-2xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-semibold text-brown-dark mb-2">SMA Lorem Ipsum</h3>
+                                    <p class="text-brown-soft font-medium mb-2">Jurusan IPA</p>
+                                    <p class="text-gray-600 mb-3">2017 - 2020</p>
+                                    <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frame 4: SKILLS & ACHIEVEMENTS -->
+    <section id="skills" class="min-h-screen bg-peach py-20">
+        <div class="container mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-brown-dark mb-16">
+                    <i class="fas fa-trophy mr-4 text-brown-soft"></i>TECHNICAL SKILLS & ACHIEVEMENTS
+                </h2>
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <!-- Technical Skills -->
+                        <div class="bg-white rounded-xl p-8 shadow-lg">
+                            <h3 class="text-2xl font-semibold text-brown-dark mb-8 flex items-center">
+                                <i class="fas fa-code mr-3 text-brown-soft"></i>
+                                Technical Skills
+                            </h3>
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="text-center">
+                                    <div class="relative w-24 h-24 mx-auto mb-4">
+                                        <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+                                            <circle cx="50" cy="50" r="40" stroke="#E5E7EB" stroke-width="8" fill="none"/>
+                                            <circle cx="50" cy="50" r="40" stroke="#DEB499" stroke-width="8" fill="none" 
+                                                    stroke-dasharray="251.2" stroke-dashoffset="37.68" 
+                                                    class="progress-circle" data-progress="85"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="text-lg font-bold text-brown-dark">85%</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-center mb-2">
+                                        <i class="fab fa-python text-2xl text-green-600 mr-2"></i>
+                                        <span class="font-medium text-brown-dark">Python</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="relative w-24 h-24 mx-auto mb-4">
+                                        <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+                                            <circle cx="50" cy="50" r="40" stroke="#E5E7EB" stroke-width="8" fill="none"/>
+                                            <circle cx="50" cy="50" r="40" stroke="#DEB499" stroke-width="8" fill="none" 
+                                                    stroke-dasharray="251.2" stroke-dashoffset="37.68" 
+                                                    class="progress-circle" data-progress="85"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="text-lg font-bold text-brown-dark">85%</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-center mb-2">
+                                        <i class="fab fa-html5 text-2xl text-orange-500 mr-2"></i>
+                                        <span class="font-medium text-brown-dark">HTML</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="relative w-24 h-24 mx-auto mb-4">
+                                        <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+                                            <circle cx="50" cy="50" r="40" stroke="#E5E7EB" stroke-width="8" fill="none"/>
+                                            <circle cx="50" cy="50" r="40" stroke="#DEB499" stroke-width="8" fill="none" 
+                                                    stroke-dasharray="251.2" stroke-dashoffset="62.8" 
+                                                    class="progress-circle" data-progress="75"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="text-lg font-bold text-brown-dark">75%</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-center mb-2">
+                                        <i class="fab fa-css3-alt text-2xl text-blue-500 mr-2"></i>
+                                        <span class="font-medium text-brown-dark">CSS</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="relative w-24 h-24 mx-auto mb-4">
+                                        <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+                                            <circle cx="50" cy="50" r="40" stroke="#E5E7EB" stroke-width="8" fill="none"/>
+                                            <circle cx="50" cy="50" r="40" stroke="#DEB499" stroke-width="8" fill="none" 
+                                                    stroke-dasharray="251.2" stroke-dashoffset="62.8" 
+                                                    class="progress-circle" data-progress="75"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="text-lg font-bold text-brown-dark">75%</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-center mb-2">
+                                        <i class="fab fa-js-square text-2xl text-yellow-500 mr-2"></i>
+                                        <span class="font-medium text-brown-dark">JavaScript</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Achievements -->
+                        <div class="bg-white rounded-xl p-8 shadow-lg">
+                            <h3 class="text-2xl font-semibold text-brown-dark mb-8 flex items-center">
+                                <i class="fas fa-medal mr-3 text-brown-soft"></i>
+                                Achievements
+                            </h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-yellow-100 p-3 rounded-full">
+                                        <i class="fas fa-award text-yellow-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-brown-dark">Lorem Ipsum Award</h4>
+                                        <p class="text-gray-600 text-sm">2023</p>
+                                        <p class="text-gray-700 mt-1">Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-blue-100 p-3 rounded-full">
+                                        <i class="fas fa-certificate text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-brown-dark">Certification Lorem</h4>
+                                        <p class="text-gray-600 text-sm">2022</p>
+                                        <p class="text-gray-700 mt-1">Sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-green-100 p-3 rounded-full">
+                                        <i class="fas fa-star text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-brown-dark">Best Project Award</h4>
+                                        <p class="text-gray-600 text-sm">2021</p>
+                                        <p class="text-gray-700 mt-1">Ut enim ad minim veniam quis nostrud exercitation.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-purple-100 p-3 rounded-full">
+                                        <i class="fas fa-trophy text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-brown-dark">Innovation Excellence</h4>
+                                        <p class="text-gray-600 text-sm">2024</p>
+                                        <p class="text-gray-700 mt-1">Excepteur sint occaecat cupidatat non proident sunt in culpa.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frame 5: LANGUAGE -->
+    <section id="language" class="min-h-screen bg-orange-soft py-20">
+        <div class="container mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-brown-dark mb-16">
+                    <i class="fas fa-globe mr-4 text-brown-soft"></i>LANGUAGE
+                </h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-xl p-8 text-center shadow-lg hover-scale">
+                            <div class="text-4xl mb-4">🇮🇩</div>
+                            <h3 class="text-xl font-semibold text-brown-dark mb-4">Bahasa Indonesia</h3>
+                            <div class="mb-4">
+                                <div class="flex justify-center mb-2">
+                                    <div class="w-4 h-4 bg-brown-soft rounded-full mx-1"></div>
+                                    <div class="w-4 h-4 bg-brown-soft rounded-full mx-1"></div>
+                                    <div class="w-4 h-4 bg-brown-soft rounded-full mx-1"></div>
+                                    <div class="w-4 h-4 bg-brown-soft rounded-full mx-1"></div>
+                                    <div class="w-4 h-4 bg-brown-soft rounded-full mx-1"></div>
+                                </div>
+                                <p class="text-brown-soft font-medium">Native</p>
+                            </div>
+                            <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod.</p>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-8 text-center shadow-lg hover-scale">
+                            <div class="text-4xl mb-4">🇺🇸</div>
+                            <h3 class="text-xl font-semibold text-brown-dark mb-4">English</h3>
+                            <div class="mb-4">
+                                <div class="flex justify-center mb-2">
+                                    <div class="w-4 h-4 bg-brown-soft rounded-full mx-1"></div>
+                                    <div class="w-4 h-4 bg-brown-soft rounded-full mx-1"></div>
+                                    <div class="w-4 h-4 bg-brown-soft rounded-full mx-1"></div>
+                                    <div class="w-4 h-4 bg-brown-soft rounded-full mx-1"></div>
+                                    <div class="w-4 h-4 bg-gray-300 rounded-full mx-1"></div>
+                                </div>
+                                <p class="text-brown-soft font-medium">Advanced</p>
+                            </div>
+                            <p class="text-gray-600">Tempor incididunt ut labore et dolore magna aliqua ut enim ad minim.</p>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-8 text-center shadow-lg hover-scale">
+                            <div class="text-4xl mb-4">🇩🇪</div>
+                            <h3 class="text-xl font-semibold text-brown-dark mb-4">Deutsch</h3>
+                            <div class="mb-4">
+                                <div class="flex justify-center mb-2">
+                                    <div class="w-4 h-4 bg-brown-soft rounded-full mx-1"></div>
+                                    <div class="w-4 h-4 bg-brown-soft rounded-full mx-1"></div>
+                                    <div class="w-4 h-4 bg-brown-soft rounded-full mx-1"></div>
+                                    <div class="w-4 h-4 bg-gray-300 rounded-full mx-1"></div>
+                                    <div class="w-4 h-4 bg-gray-300 rounded-full mx-1"></div>
+                                </div>
+                                <p class="text-brown-soft font-medium">Intermediate</p>
+                            </div>
+                            <p class="text-gray-600">Veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frame 6: GERMANY -->
+    <section id="germany" class="min-h-screen bg-brown-soft py-20">
+        <div class="container mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-white mb-16">
+                    <i class="fas fa-map-marker-alt mr-4 text-peach"></i>GERMANY
+                </h2>
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-4 gap-6">
+                        <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-lg">
+                            <div class="h-48 bg-peach flex items-center justify-center">
+                                <i class="fas fa-camera text-4xl text-brown-soft"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm text-brown-soft font-medium">15 Maret 2023</p>
+                                <p class="text-sm text-gray-600 font-medium">Berlin</p>
+                                <p class="text-xs text-gray-500 mt-2">Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-lg">
+                            <div class="h-48 bg-peach-light flex items-center justify-center">
+                                <i class="fas fa-mountain text-4xl text-brown-soft"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm text-brown-soft font-medium">22 Maret 2023</p>
+                                <p class="text-sm text-gray-600 font-medium">München</p>
+                                <p class="text-xs text-gray-500 mt-2">Sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-lg">
+                            <div class="h-48 bg-orange-soft flex items-center justify-center">
+                                <i class="fas fa-building text-4xl text-brown-soft"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm text-brown-soft font-medium">5 April 2023</p>
+                                <p class="text-sm text-gray-600 font-medium">Hamburg</p>
+                                <p class="text-xs text-gray-500 mt-2">Magna aliqua ut enim ad minim veniam quis nostrud.</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-lg">
+                            <div class="h-48 bg-pink-soft flex items-center justify-center">
+                                <i class="fas fa-church text-4xl text-brown-soft"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm text-brown-soft font-medium">12 April 2023</p>
+                                <p class="text-sm text-gray-600 font-medium">Köln</p>
+                                <p class="text-xs text-gray-500 mt-2">Exercitation ullamco laboris nisi ut aliquip ex ea.</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-lg">
+                            <div class="h-48 bg-cream flex items-center justify-center">
+                                <i class="fas fa-tree text-4xl text-brown-soft"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm text-brown-soft font-medium">20 April 2023</p>
+                                <p class="text-sm text-gray-600 font-medium">Frankfurt</p>
+                                <p class="text-xs text-gray-500 mt-2">Commodo consequat duis aute irure dolor in reprehenderit.</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-lg">
+                            <div class="h-48 bg-peach flex items-center justify-center">
+                                <i class="fas fa-water text-4xl text-brown-soft"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm text-brown-soft font-medium">28 April 2023</p>
+                                <p class="text-sm text-gray-600 font-medium">Dresden</p>
+                                <p class="text-xs text-gray-500 mt-2">Voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-lg">
+                            <div class="h-48 bg-peach-light flex items-center justify-center">
+                                <i class="fas fa-castle text-4xl text-brown-soft"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm text-brown-soft font-medium">5 Mei 2023</p>
+                                <p class="text-sm text-gray-600 font-medium">Heidelberg</p>
+                                <p class="text-xs text-gray-500 mt-2">Pariatur excepteur sint occaecat cupidatat non proident.</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-lg">
+                            <div class="h-48 bg-orange-soft flex items-center justify-center">
+                                <i class="fas fa-landmark text-4xl text-brown-soft"></i>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm text-brown-soft font-medium">12 Mei 2023</p>
+                                <p class="text-sm text-gray-600 font-medium">Nürnberg</p>
+                                <p class="text-xs text-gray-500 mt-2">Sunt in culpa qui officia deserunt mollit anim id est.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frame 7: HOBBY & INTEREST -->
+    <section id="hobby" class="min-h-screen bg-cream py-20">
+        <div class="container mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-brown-dark mb-16">
+                    <i class="fas fa-star mr-4 text-brown-soft"></i>HOBBY & INTEREST
+                </h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white rounded-xl p-8 text-center shadow-lg hover-scale">
+                            <div class="text-5xl mb-6 text-brown-soft">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-brown-dark mb-4">Piano</h3>
+                            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-8 text-center shadow-lg hover-scale">
+                            <div class="text-5xl mb-6 text-brown-soft">
+                                <i class="fas fa-guitar"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-brown-dark mb-4">Gitar</h3>
+                            <p class="text-gray-600">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-8 text-center shadow-lg hover-scale">
+                            <div class="text-5xl mb-6 text-brown-soft">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-brown-dark mb-4">Bernyanyi</h3>
+                            <p class="text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-8 text-center shadow-lg hover-scale">
+                            <div class="text-5xl mb-6 text-brown-soft">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-brown-dark mb-4">Software Engineering</h3>
+                            <p class="text-gray-600">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frame 8: DOCUMENTATION -->
+    <section id="documentation" class="min-h-screen bg-peach-light py-20">
+        <div class="container mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-brown-dark mb-16">
+                    <i class="fas fa-music mr-4 text-brown-soft"></i>MUSIC
+                </h2>
+                <div class="max-w-5xl mx-auto">
+                    <div class="space-y-6">
+                        <!-- Video Section -->
+                        <div class="bg-white rounded-xl p-8 shadow-lg">
+                            <h3 class="text-2xl font-semibold text-brown-dark mb-6 flex items-center">
+                                <i class="fas fa-video mr-3 text-brown-soft"></i>
+                                Music Video
+                            </h3>
+                            <div class="max-w-4xl mx-auto">
+                                <div class="bg-gray-200 rounded-lg aspect-video flex items-center justify-center mb-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-play-circle text-7xl text-brown-soft mb-4"></i>
+                                        <p class="text-gray-600 text-lg">Music Video Player</p>
+                                        <p class="text-gray-500 mt-2">Sample music video content would be displayed here</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-center max-w-3xl mx-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+
+                        <!-- Image Section -->
+                        <div class="bg-white rounded-xl p-8 shadow-lg">
+                            <h3 class="text-2xl font-semibold text-brown-dark mb-6 flex items-center">
+                                <i class="fas fa-image mr-3 text-brown-soft"></i>
+                                Music Photos
+                            </h3>
+                            <div class="max-w-4xl mx-auto">
+                                <div class="bg-peach rounded-lg aspect-video flex items-center justify-center mb-4 hover-scale">
+                                    <div class="text-center">
+                                        <i class="fas fa-camera text-6xl text-brown-soft mb-4"></i>
+                                        <p class="text-brown-dark font-medium text-lg">Music Photo</p>
+                                        <p class="text-gray-600 mt-2">Sample music image</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-center max-w-3xl mx-auto">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frame 9: PORTFOLIO -->
+    <section id="portfolio" class="min-h-screen bg-peach py-20">
+        <div class="container mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-brown-dark mb-16">
+                    <i class="fas fa-briefcase mr-4 text-brown-soft"></i>PORTFOLIO
+                </h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale">
+                        <div class="md:flex">
+                            <div class="md:w-1/2 bg-orange-soft p-12 flex items-center justify-center">
+                                <div class="text-center">
+                                    <i class="fas fa-globe text-6xl text-brown-soft mb-4"></i>
+                                    <h3 class="text-2xl font-semibold text-brown-dark">Website Portfolio</h3>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 p-8">
+                                <h3 class="text-2xl font-semibold text-brown-dark mb-4">Lorem Ipsum Website</h3>
+                                <p class="text-gray-600 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="bg-brown-soft text-white px-3 py-1 rounded-full text-sm">HTML</span>
+                                    <span class="bg-brown-soft text-white px-3 py-1 rounded-full text-sm">CSS</span>
+                                    <span class="bg-brown-soft text-white px-3 py-1 rounded-full text-sm">JavaScript</span>
+                                    <span class="bg-brown-soft text-white px-3 py-1 rounded-full text-sm">React</span>
+                                </div>
+                                <div class="flex gap-4">
+                                    <button class="bg-brown-soft hover:bg-brown-dark text-white px-6 py-2 rounded-lg transition-colors duration-300">
+                                        <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                                    </button>
+                                    <button class="border-2 border-brown-soft text-brown-soft hover:bg-brown-soft hover:text-white px-6 py-2 rounded-lg transition-all duration-300">
+                                        <i class="fab fa-github mr-2"></i>Source Code
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frame 10: CONTACT -->
+    <section id="contact" class="min-h-screen bg-pink-soft py-20">
+        <div class="container mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-brown-dark mb-16">
+                    <i class="fas fa-envelope mr-4 text-brown-soft"></i>CONTACT
+                </h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <!-- Contact Info -->
+                        <div class="space-y-8">
+                            <div class="flex items-center gap-6">
+                                <div class="bg-brown-soft text-white p-4 rounded-full">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-brown-dark">Email</h3>
+                                    <p class="text-gray-600">lorem.ipsum@email.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-6">
+                                <div class="bg-brown-soft text-white p-4 rounded-full">
+                                    <i class="fas fa-phone text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-brown-dark">Phone</h3>
+                                    <p class="text-gray-600">+62 123 456 7890</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-6">
+                                <div class="bg-brown-soft text-white p-4 rounded-full">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-brown-dark">Location</h3>
+                                    <p class="text-gray-600">Jakarta, Indonesia</p>
+                                </div>
+                            </div>
+
+                            <!-- Social Media -->
+                            <div class="pt-8">
+                                <h3 class="text-lg font-semibold text-brown-dark mb-4">Follow Me</h3>
+                                <div class="flex gap-4">
+                                    <a href="#" class="bg-brown-soft hover:bg-brown-dark text-white p-3 rounded-full transition-colors duration-300">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                    <a href="#" class="bg-brown-soft hover:bg-brown-dark text-white p-3 rounded-full transition-colors duration-300">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="#" class="bg-brown-soft hover:bg-brown-dark text-white p-3 rounded-full transition-colors duration-300">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="bg-brown-soft hover:bg-brown-dark text-white p-3 rounded-full transition-colors duration-300">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form -->
+                        <div class="bg-white rounded-xl p-8 shadow-lg">
+                            <h3 class="text-2xl font-semibold text-brown-dark mb-6">Send Message</h3>
+                            <form onsubmit="handleContactForm(event)" class="space-y-6">
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">Name</label>
+                                    <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brown-soft transition-colors duration-300">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">Email</label>
+                                    <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brown-soft transition-colors duration-300">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">Message</label>
+                                    <textarea rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brown-soft transition-colors duration-300 resize-none"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-brown-soft hover:bg-brown-dark text-white py-3 rounded-lg font-medium transition-colors duration-300">
+                                    <i class="fas fa-paper-plane mr-2"></i>
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brown-dark text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg mb-2">
+                <i class="fas fa-heart text-red-400 mr-2"></i>
+                Made with love
+            </p>
+            <p class="text-gray-300">© 2024 Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Smooth scroll to section
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate progress bars and circles when skills section is visible
+                    if (entry.target.id === 'skills') {
+                        setTimeout(() => {
+                            const progressBars = entry.target.querySelectorAll('.progress-bar');
+                            progressBars.forEach(bar => {
+                                bar.classList.add('animate');
+                            });
+                            
+                            const progressCircles = entry.target.querySelectorAll('.progress-circle');
+                            progressCircles.forEach(circle => {
+                                const progress = circle.getAttribute('data-progress');
+                                circle.style.setProperty('--progress', progress);
+                                circle.classList.add('animate');
+                            });
+                        }, 500);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+
+        // Contact form handler
+        function handleContactForm(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const name = formData.get('name') || event.target.querySelector('input[type="text"]').value;
+            const email = formData.get('email') || event.target.querySelector('input[type="email"]').value;
+            const message = formData.get('message') || event.target.querySelector('textarea').value;
+            
+            // Show success message
+            alert(`Terima kasih ${name}! Pesan Anda telah dikirim. Saya akan segera menghubungi Anda di ${email}.`);
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        // Add active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-brown-soft');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-brown-soft');
+                }
+            });
+        });
+
+        // Add floating animation to elements
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add random delays to floating animations
+            const floatingElements = document.querySelectorAll('.float');
+            floatingElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.5}s`;
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9882e72623f3445e',t:'MTc1OTM5NDUxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
